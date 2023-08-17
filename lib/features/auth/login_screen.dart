@@ -1,7 +1,17 @@
+import 'dart:developer';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vibe_now/features/auth/user_info_screen.dart';
+import 'package:vibe_now/features/home/home_screen.dart';
 import 'package:vibe_now/routes/app_routes.dart';
+import 'package:vibe_now/routes/navigation.dart';
+import 'package:vibe_now/services/streams.dart';
 import 'package:vibe_now/utils/utils.dart';
+
+import '../../utils/loading.dart';
+import 'login_provider.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const id = AppRoutes.loginScreen;
@@ -27,7 +37,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         Positioned(
             top: size.height / 8,
             left: 24,
-            child: Text(
+            child: const Text(
               "OUR  FASHION",
               style:
                   TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
@@ -39,7 +49,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   '''
 Shop the most 
 modern 
@@ -50,7 +60,7 @@ essensials
                       // fontWeight: FontWeight.w500,
                       fontSize: 24),
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_right,
                   size: 32,
                 ),
@@ -59,7 +69,38 @@ essensials
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     sbw(size.width / 6),
-                    Image.asset('assets/google.png'),
+                    InkWell(
+                        onTap: () async {
+                          ref
+                              .read(authProvider)
+                              .signInWithGoogle()
+                              .then((value) {
+                            if (value != null) {
+                              ref.read(authProvider).configUSer(value);
+                              // ref
+                              //     .read(authProvider)
+                              //     .checkAndCreateUser(value.uid, value);
+                              Streams()
+                                  .userQuery
+                                  .doc(value.uid)
+                                  .get()
+                                  .then((value) {
+                                if (value.exists) {
+                                  log("came here ");
+                                  Navigation.instance
+                                      .navigateTo(HomeScreen.id.path);
+                                } else {
+                                  Navigation.instance.navigateTo(
+                                      OnBoardingIntroScreens.id.path);
+                                }
+                              });
+                            } else {
+                              appToast("Some Error Occured");
+                            }
+                          });
+                          Loading().indicator(context);
+                        },
+                        child: Image.asset('assets/google.png')),
                   ],
                 )
               ],
