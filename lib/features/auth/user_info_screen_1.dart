@@ -139,7 +139,7 @@ class _OnBoardingIntroScreensState
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          "Beard",
+                          "Bread",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),

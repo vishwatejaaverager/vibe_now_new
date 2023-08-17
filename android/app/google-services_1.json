@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1057575228681",
+    "project_id": "vibenow-87b0a",
+    "storage_bucket": "vibenow-87b0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057575228681:android:fc6f7a7e0710f45d082fd8",
+        "android_client_info": {
+          "package_name": "com.example.vibe_now"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057575228681-dhr0jtbk7nij78098es1sf4kra4qqbev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt-3pKPUw9_mvQDAxJfFiLpeuo9UzCMoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057575228681-dhr0jtbk7nij78098es1sf4kra4qqbev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

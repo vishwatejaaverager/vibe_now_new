@@ -35,7 +35,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.blue,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -46,19 +45,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(color: Colors.yellow),
-                    child: const Text(
-                      "FitFabels",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                    ),
+                  const Text(
+                    "FitFabels",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   Image.asset('assets/Love.png')
                 ],
               ),
-              const Divider(),
               sbh(24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,8 +66,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       ),
                       sbh(6),
                       SizedBox(
-                        height: size.height / 6,
-                        width: size.width - 20,
+                        height: size.height / 9,
+                        width: size.width / 1.5,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
@@ -86,10 +79,39 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     ],
                   ),
                   sbh(6),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final home = ref.watch(homePro);
+                      return home.userModel == null
+                          ? Container(
+                              height: size.height / 5,
+                              width: size.width / 4,
+                              decoration: const BoxDecoration(
+                                color: Colors.black,
+                                borderRadius:
+                                    BorderRadius.all(Radius.elliptical(90, 90)),
+                              ),
+                            )
+                          : Container(
+                              height: size.height / 5,
+                              width: size.width / 4,
+                              decoration: BoxDecoration(
+                                //  color: Colors.black,
+
+                                image: DecorationImage(
+                                    fit: BoxFit.fitHeight,
+                                    image: NetworkImage(
+                                      home.userModel!.photoUrl,
+                                    )),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.elliptical(90, 90)),
+                              ),
+                            );
+                    },
+                  ),
                 ],
               ),
               sbh(24),
-              const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -135,7 +157,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     SizedBox(child: Center(child: Text("Wedding"))),
                     SizedBox(child: Center(child: Text("Date"))),
                     SizedBox(child: Center(child: Text("Club/Night"))),
-                    SizedBox(child: Center(child: Text("College Fest")))
+                    SizedBox(child: Center(child: Text("Collage Fest")))
                   ]),
               sbh(12),
               Expanded(
